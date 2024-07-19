@@ -51,7 +51,9 @@
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "less",
+      "changeDetection": "OnPush",
+      "skipTests": true
     }
   },
   "defaultProject": "manifest"
