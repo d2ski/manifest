@@ -1,12 +1,13 @@
 <main class="container mx-auto px-4">
-  <section class="mt-8">
-    <div class="prose">
-      <h1>Манифест продуктивности</h1>
-      <p>
-        But a recent study shows that the celebrated appetizer may be linked to
-        a series of rabies cases springing up around the country.
-      </p>
-    </div>
+  <section class="mt-4 mb-8">
+    <app-header></app-header>
   </section>
-  <button class="btn btn-primary">Primary</button>
+  <section class="border-b-2 mb-8">
+    <h2 class="font-semibold text-sm mb-2">Задачи на день</h2>
+    @for (period of timePeriods; track $index) {
+    <div class="border-t-2">
+      <app-schedule-item [timePeriod]="period"></app-schedule-item>
+    </div>
+    }
+  </section>
 </main>
