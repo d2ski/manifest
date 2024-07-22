@@ -35,6 +35,7 @@
     "@angular/cli": "~18.1.0",
     "@angular/compiler-cli": "~18.1.0",
     "@angular/language-service": "~18.1.0",
+    "@fontsource-variable/martian-mono": "^5.0.13",
     "@nx/eslint": "19.5.1",
     "@nx/eslint-plugin": "19.5.1",
     "@nx/jest": "19.5.1",

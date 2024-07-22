@@ -13,3 +13,7 @@
 * {
   margin: 0;
 }
+
+body {
+  @apply font-martian;
+}
