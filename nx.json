@@ -47,11 +47,11 @@
     "@nx/angular:application": {
       "e2eTestRunner": "none",
       "linter": "eslint",
-      "style": "less",
+      "style": "css",
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "style": "less",
+      "style": "css",
       "changeDetection": "OnPush",
       "skipTests": true
     }
