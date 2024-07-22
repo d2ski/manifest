@@ -2,33 +2,44 @@
   <section class="mt-4 mb-8">
     <app-header></app-header>
   </section>
-  <section class="border-b-2 mb-8">
-    <h2 class="font-semibold text-xs mb-3 uppercase">План на день</h2>
-    @for (period of timePeriods; track $index) {
-    <div class="border-t-2">
-      <app-schedule-item [timePeriod]="period"></app-schedule-item>
-    </div>
-    }
-  </section>
-  <section class="border py-4 px-4 mb-8">
-    <div class="flex justify-between items-center mb-3">
-      <h2 class="font-semibold text-xs uppercase">Макро (цели)</h2>
-      <div class="font-medium text-xs opacity-50 uppercase">90 дней</div>
-    </div>
-    <app-goals></app-goals>
-  </section>
-  <section class="border py-4 px-4 mb-8">
-    <div class="flex justify-between items-center mb-3">
-      <h2 class="font-semibold text-xs uppercase">Промежуточные достижения</h2>
-      <div class="font-medium text-xs opacity-50 uppercase">30 дней</div>
-    </div>
-    <app-goals></app-goals>
-  </section>
-  <section class="border py-4 px-4 mb-8">
-    <div class="flex justify-between items-center mb-3">
-      <h2 class="font-semibold text-xs uppercase">Микро (задачи)</h2>
-      <div class="font-medium text-xs opacity-50 uppercase">Сегодня</div>
-    </div>
-    <app-goals [isMicro]="true"></app-goals>
-  </section>
+
+  <form [formGroup]="manifestForm">
+    <section class="border-b-2 mb-8">
+      <h2 class="font-semibold text-xs mb-3 uppercase">План на день</h2>
+      @for (period of timePeriods; track $index) {
+      <div class="border-t-2">
+        <app-schedule-item [timePeriod]="period"></app-schedule-item>
+      </div>
+      }
+    </section>
+
+    <section class="border py-4 px-4 mb-8">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="font-semibold text-xs uppercase">Макро (цели)</h2>
+        <div class="font-medium text-xs opacity-50 uppercase">90 дней</div>
+      </div>
+      <app-goals [goals]="manifestForm.controls.goals"></app-goals>
+    </section>
+
+    <section class="border py-4 px-4 mb-8">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="font-semibold text-xs uppercase">
+          Промежуточные достижения
+        </h2>
+        <div class="font-medium text-xs opacity-50 uppercase">30 дней</div>
+      </div>
+      <app-goals [goals]="manifestForm.controls.milestones"></app-goals>
+    </section>
+
+    <section class="border py-4 px-4 mb-8">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="font-semibold text-xs uppercase">Микро (задачи)</h2>
+        <div class="font-medium text-xs opacity-50 uppercase">Сегодня</div>
+      </div>
+      <app-goals
+        [isMicro]="true"
+        [goals]="manifestForm.controls.tasks"
+      ></app-goals>
+    </section>
+  </form>
 </main>

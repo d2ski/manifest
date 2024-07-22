@@ -1,4 +1,36 @@
-<div class="flex justify-between items-center mb-1">
+<div [formGroup]="goals()">
+  <div>
+    @for (item of items; track $index; let idx = $index) {
+    <div
+      class="flex justify-between items-center mb-1"
+      [formGroupName]="item.label"
+    >
+      @if (isMicro()) {
+      <div class="text-sm">{{ idx + 1 }}.</div>
+      } @else {
+      <ng-icon class="mr-2" [name]="item.icon" size="18px"></ng-icon>
+      }
+
+      <input
+        formControlName="goal"
+        type="text"
+        placeholder="Цель"
+        class="input input-sm w-full grow focus:outline-none focus:border-0 focus:bg-neutral-50"
+      />
+
+      @if (isMicro()) {
+      <input
+        formControlName="isDone"
+        type="checkbox"
+        class="checkbox checkbox-md ml-2"
+      />
+      }
+    </div>
+    }
+  </div>
+</div>
+
+<!-- <div class="flex justify-between items-center mb-1">
   @if (isMicro()) {
   <div class="text-sm">1.</div>
   } @else {
@@ -45,4 +77,4 @@
   @if (isMicro()) {
   <input type="checkbox" class="checkbox checkbox-md ml-2" />
   }
-</div>
+</div> -->
