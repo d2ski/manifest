@@ -53,7 +53,8 @@
     "@nx/angular:component": {
       "style": "css",
       "changeDetection": "OnPush",
-      "skipTests": true
+      "skipTests": true,
+      "inlineStyle": true
     }
   },
   "defaultProject": "manifest"

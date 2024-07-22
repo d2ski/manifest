@@ -1,5 +1,7 @@
 <div class="flex justify-between items-center">
-  <div class="px-2">{{ timePeriod().toString().padStart(2, '0') }}:00</div>
+  <div class="px-2 text-xs">
+    {{ timePeriod().toString().padStart(2, '0') }}:00
+  </div>
   <div class="grow px-2">
     <input
       type="text"

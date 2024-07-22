@@ -2,11 +2,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './ui/header/header.component';
 import { ScheduleItemComponent } from './ui/schedule-item/schedule-item.component';
+import { GoalsComponent } from './ui/goals/goals.component';
 
 @Component({
   selector: 'app-manifest',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, ScheduleItemComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    ScheduleItemComponent,
+    GoalsComponent,
+  ],
   templateUrl: './manifest.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
