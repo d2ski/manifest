@@ -4,13 +4,20 @@
   </section>
 
   <form [formGroup]="manifestForm">
-    <section class="border-b-2 mb-8">
+    <section formGroupName="schedule" class="border-b-2 mb-8">
       <h2 class="font-semibold text-xs mb-3 uppercase">План на день</h2>
-      @for (period of timePeriods; track $index) {
-      <div class="border-t-2">
-        <app-schedule-item [timePeriod]="period"></app-schedule-item>
+      <div formArrayName="items">
+        @for (scheduleItem of
+        manifestForm.controls.schedule.controls.items.controls; let idx =
+        $index; track idx) {
+        <div class="border-t-2">
+          <app-schedule-item
+            [scheduleItem]="scheduleItem"
+            [timePeriod]="timePeriods[idx]"
+          ></app-schedule-item>
+        </div>
+        }
       </div>
-      }
     </section>
 
     <section class="border py-4 px-4 mb-8">

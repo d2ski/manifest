@@ -31,6 +31,13 @@ export class ManifestComponent implements OnInit {
   public readonly timePeriods = new Array(12)
     .fill(this.startPeriod)
     .map((_, idx) => this.startPeriod + idx);
+  private readonly scheduleItemsControls = this.timePeriods.map((_period) => {
+    return this.fb.group({
+      isDone: this.fb.nonNullable.control(false),
+      firstItem: this.fb.nonNullable.control(`${_period}`),
+      secondItem: this.fb.nonNullable.control(`${_period + 1}`),
+    });
+  });
 
   readonly manifestForm: ManifestForm = this.fb.group({
     date: this.fb.nonNullable.control<string>(new Date().toLocaleDateString()),
@@ -66,9 +73,9 @@ export class ManifestComponent implements OnInit {
         isDone: this.fb.nonNullable.control(false),
       }),
     }),
-    // schedule: this.fb.array<ManifestScheduleItem>([]),
-    // milestones: this.fb.array<string>(['', '', '']),
-    // tasks: this.fb.array<string>(['', '', '']),
+    schedule: this.fb.group({
+      items: this.fb.array(this.scheduleItemsControls),
+    }),
   });
 
   ngOnInit(): void {

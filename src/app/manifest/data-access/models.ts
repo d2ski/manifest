@@ -1,9 +1,9 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export type ManifestScheduleItem = FormGroup<{
   isDone: FormControl<boolean>;
-  primaryData: FormControl<string>;
-  secondaryData: FormControl<string>;
+  firstItem: FormControl<string>;
+  secondItem: FormControl<string>;
 }>;
 
 export type ManifestGoalsItem = FormGroup<{
@@ -13,6 +13,10 @@ export type ManifestGoalsItem = FormGroup<{
 export type ManifestTasksItem = FormGroup<{
   goal: FormControl<string>;
   isDone: FormControl<boolean>;
+}>;
+
+export type ManifestScheduleForm = FormGroup<{
+  items: FormArray<ManifestScheduleItem>;
 }>;
 
 export type ManifestGoalsForm = FormGroup<{
@@ -32,4 +36,5 @@ export type ManifestForm = FormGroup<{
   goals: ManifestGoalsForm;
   milestones: ManifestGoalsForm;
   tasks: ManifestTasksForm;
+  schedule: ManifestScheduleForm;
 }>;
