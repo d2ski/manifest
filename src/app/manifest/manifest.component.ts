@@ -1,6 +1,8 @@
 import {
+  afterRender,
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
   OnInit,
 } from '@angular/core';
@@ -10,6 +12,9 @@ import { ScheduleItemComponent } from './ui/schedule-item/schedule-item.componen
 import { GoalsComponent } from './ui/goals/goals.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ManifestForm } from './data-access/models';
+import { ManifestService } from './data-access/manifest.service';
+import { Manifest } from '../core/models/manifest';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-manifest',
@@ -25,7 +30,10 @@ import { ManifestForm } from './data-access/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManifestComponent implements OnInit {
+  private readonly manifestSvc = inject(ManifestService);
   private readonly fb = inject(FormBuilder);
+
+  private readonly manifest = this.manifestSvc.manifest;
 
   private readonly startPeriod = 6;
   public readonly timePeriods = new Array(12)
@@ -78,7 +86,34 @@ export class ManifestComponent implements OnInit {
     }),
   });
 
+  constructor() {
+    afterRender(() => {
+      if (!this.manifest()) {
+        this.manifestSvc.loadManifest();
+        const manifest = this.manifest();
+
+        if (manifest) {
+          this.manifestForm.patchValue(manifest);
+        }
+      }
+    });
+
+    effect(() => {
+      const manifest = this.manifest();
+      if (manifest) {
+        this.manifestSvc.saveManifest();
+      }
+    });
+  }
+
   ngOnInit(): void {
-    this.manifestForm.valueChanges.subscribe((values) => console.log(values));
+    this.manifestForm.valueChanges
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
+      )
+      .subscribe((manifest) =>
+        this.manifestSvc.setManifest(manifest as Manifest)
+      );
   }
 }
