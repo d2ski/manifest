@@ -2,7 +2,7 @@
   <div>
     @for (item of items; track $index; let idx = $index) {
     <div
-      class="flex justify-between items-center mb-1"
+      class="flex justify-between items-center mb-2"
       [formGroupName]="item.label"
     >
       @if (isMicro()) {
@@ -14,15 +14,15 @@
       <input
         formControlName="goal"
         type="text"
-        placeholder="Цель"
-        class="input input-sm w-full grow focus:outline-none focus:border-0 focus:bg-neutral-50"
+        placeholder=""
+        class="input input-xs input-bordered border-0 border-b w-full text-blue-700 grow focus:outline-none focus:bg-neutral-50"
       />
 
       @if (isMicro()) {
       <input
         formControlName="isDone"
         type="checkbox"
-        class="checkbox checkbox-md ml-2"
+        class="checkbox checkbox-sm ml-2"
       />
       }
     </div>

@@ -31,45 +31,45 @@ export class ManifestComponent implements OnInit {
   public readonly timePeriods = new Array(12)
     .fill(this.startPeriod)
     .map((_, idx) => this.startPeriod + idx);
-  private readonly scheduleItemsControls = this.timePeriods.map((_period) => {
+  private readonly scheduleItemsControls = this.timePeriods.map(() => {
     return this.fb.group({
       isDone: this.fb.nonNullable.control(false),
-      firstItem: this.fb.nonNullable.control(`${_period}`),
-      secondItem: this.fb.nonNullable.control(`${_period + 1}`),
+      firstItem: this.fb.nonNullable.control(''),
+      secondItem: this.fb.nonNullable.control(''),
     });
   });
 
   readonly manifestForm: ManifestForm = this.fb.group({
     date: this.fb.nonNullable.control<string>(new Date().toLocaleDateString()),
     goals: this.fb.group({
-      firstItem: this.fb.group({ goal: this.fb.nonNullable.control('Цель 1') }),
+      firstItem: this.fb.group({ goal: this.fb.nonNullable.control('') }),
       secondItem: this.fb.group({
-        goal: this.fb.nonNullable.control('Цель 2'),
+        goal: this.fb.nonNullable.control(''),
       }),
-      thirdItem: this.fb.group({ goal: this.fb.nonNullable.control('Цель 3') }),
+      thirdItem: this.fb.group({ goal: this.fb.nonNullable.control('') }),
     }),
     milestones: this.fb.group({
       firstItem: this.fb.group({
-        goal: this.fb.nonNullable.control('Достижение 1'),
+        goal: this.fb.nonNullable.control(''),
       }),
       secondItem: this.fb.group({
-        goal: this.fb.nonNullable.control('Достижение 2'),
+        goal: this.fb.nonNullable.control(''),
       }),
       thirdItem: this.fb.group({
-        goal: this.fb.nonNullable.control('Достижение 3'),
+        goal: this.fb.nonNullable.control(''),
       }),
     }),
     tasks: this.fb.group({
       firstItem: this.fb.group({
-        goal: this.fb.nonNullable.control('Задача 1'),
+        goal: this.fb.nonNullable.control(''),
         isDone: this.fb.nonNullable.control(false),
       }),
       secondItem: this.fb.group({
-        goal: this.fb.nonNullable.control('Задача 2'),
+        goal: this.fb.nonNullable.control(''),
         isDone: this.fb.nonNullable.control(false),
       }),
       thirdItem: this.fb.group({
-        goal: this.fb.nonNullable.control('Задача 3'),
+        goal: this.fb.nonNullable.control(''),
         isDone: this.fb.nonNullable.control(false),
       }),
     }),
