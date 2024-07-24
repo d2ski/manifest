@@ -5,17 +5,19 @@
       class="flex justify-between items-center mb-2"
       [formGroupName]="item.label"
     >
-      @if (isMicro()) {
-      <div class="text-sm">{{ idx + 1 }}.</div>
-      } @else {
-      <ng-icon class="mr-2" [name]="item.icon" size="18px"></ng-icon>
-      }
+      <div class="pr-1">
+        @if (isMicro()) {
+        <div class="text-sm">{{ idx + 1 }}.</div>
+        } @else {
+        <ng-icon class="w-fit" [name]="item.icon" size="18px"></ng-icon>
+        }
+      </div>
 
       <input
         formControlName="goal"
         type="text"
         placeholder=""
-        class="input input-xs input-bordered border-0 border-b w-full text-blue-700 grow focus:outline-none focus:bg-neutral-50"
+        class="input input-xs input-bordered border-0 border-b w-full text-blue-700 focus:outline-none focus:bg-neutral-50"
       />
 
       @if (isMicro()) {

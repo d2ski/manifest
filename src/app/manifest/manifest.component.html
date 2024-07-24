@@ -1,9 +1,12 @@
-<main class="container mx-auto px-4">
+<main class="md:container mx-auto px-4">
   <section class="mt-4 mb-8">
     <app-header></app-header>
   </section>
 
-  <form [formGroup]="manifestForm" class="grid grid-cols-2 gap-8 w-full">
+  <form
+    [formGroup]="manifestForm"
+    class="md:grid md:grid-cols-2 md:gap-8 w-full"
+  >
     <section formGroupName="schedule" class="grow py-4 mb-8">
       <h2 class="font-semibold text-xs mb-3 uppercase">План на день</h2>
       <div formArrayName="items" class="border-b-2">
