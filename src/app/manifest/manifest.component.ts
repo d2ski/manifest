@@ -15,6 +15,8 @@ import { ManifestForm } from './data-access/models';
 import { ManifestService } from './data-access/manifest.service';
 import { Manifest } from '../core/models/manifest';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { AuthService } from '../auth/data-access/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manifest',
@@ -32,6 +34,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class ManifestComponent implements OnInit {
   private readonly manifestSvc = inject(ManifestService);
   private readonly fb = inject(FormBuilder);
+  private readonly authSvc = inject(AuthService);
+  private readonly router = inject(Router);
+  readonly user = this.authSvc.user;
 
   private readonly manifest = this.manifestSvc.manifest;
 
@@ -115,5 +120,10 @@ export class ManifestComponent implements OnInit {
       .subscribe((manifest) =>
         this.manifestSvc.setManifest(manifest as Manifest)
       );
+  }
+
+  logout() {
+    this.authSvc.logout();
+    this.router.navigateByUrl('/login');
   }
 }

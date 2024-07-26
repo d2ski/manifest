@@ -1,6 +1,6 @@
 <main class="md:container mx-auto px-4">
   <section class="mt-4 mb-8">
-    <app-header></app-header>
+    <app-header [user]="user()" (logout)="logout()"></app-header>
   </section>
 
   <form
