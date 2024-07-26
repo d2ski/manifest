@@ -3,7 +3,6 @@
     <h1 class="text-base font-black">Манифест продуктивности</h1>
   </div>
   <div class="flex items-center gap-3">
-    <div class="text-sm">{{ currentDate }}</div>
     @if (user()?.isValid) {
     <button class="btn btn-ghost btn-sm" (click)="logout.emit()">
       <ng-icon class="w-fit" name="lucideLogOut" size="16px"></ng-icon>

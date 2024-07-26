@@ -21,5 +21,4 @@ import { lucideLogOut } from '@ng-icons/lucide';
 export class HeaderComponent {
   readonly user = input<User | undefined>();
   readonly logout = output<void>();
-  public readonly currentDate = new Date().toLocaleDateString();
 }

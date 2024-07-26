@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './ui/header/header.component';
+import { HeaderComponent } from '../core/ui/header/header.component';
 import { ScheduleItemComponent } from './ui/schedule-item/schedule-item.component';
 import { GoalsComponent } from './ui/goals/goals.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
