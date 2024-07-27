@@ -34,4 +34,14 @@ export class ManifestsListComponent implements OnInit {
     this.authSvc.logout();
     this.router.navigateByUrl('/login');
   }
+
+  async addNewManifest() {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+
+    const newManifestId = await this.manifestsListSvc.addNewManifest(
+      date.toISOString()
+    );
+    console.log(newManifestId);
+  }
 }
