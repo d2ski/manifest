@@ -4,6 +4,7 @@ import {
   Component,
   effect,
   inject,
+  input,
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -32,6 +33,7 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManifestComponent implements OnInit {
+  manifestId = input.required<string>();
   private readonly manifestSvc = inject(ManifestService);
   private readonly fb = inject(FormBuilder);
   private readonly authSvc = inject(AuthService);
@@ -92,26 +94,32 @@ export class ManifestComponent implements OnInit {
   });
 
   constructor() {
-    afterRender(() => {
-      if (!this.manifest()) {
-        this.manifestSvc.loadManifest();
-        const manifest = this.manifest();
+    effect(
+      () => {
+        const manifestId = this.manifestId();
+        console.log('manifestId component changed');
 
-        if (manifest) {
-          this.manifestForm.patchValue(manifest);
+        if (manifestId) {
+          this.manifestSvc.setManifestId(manifestId);
         }
-      }
-    });
+      },
+      { allowSignalWrites: true }
+    );
 
     effect(() => {
       const manifest = this.manifest();
+
       if (manifest) {
-        this.manifestSvc.saveManifest();
+        this.manifestForm.patchValue(manifest);
       }
     });
   }
 
   ngOnInit(): void {
+    this.listenManifestFormChanges();
+  }
+
+  private listenManifestFormChanges() {
     this.manifestForm.valueChanges
       .pipe(
         debounceTime(1000),

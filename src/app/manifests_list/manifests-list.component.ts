@@ -7,13 +7,13 @@ import {
 import { CommonModule } from '@angular/common';
 import { ManifestsListService } from './data-access/manifests-list.service';
 import { AuthService } from '../auth/data-access/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../core/ui/header/header.component';
 
 @Component({
   selector: 'app-manifests-list',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule, HeaderComponent, RouterLink],
   templateUrl: './manifests-list.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -9,7 +9,11 @@
     <ul class="w-full">
       @for (item of manifestsList(); track $index) {
       <li>
-        <button class="btn btn-outline w-full mb-2">{{ item.date }}</button>
+        <a
+          [routerLink]="['/app/manifest', item.id]"
+          class="btn btn-outline w-full mb-2"
+          >{{ item.date }}</a
+        >
       </li>
       }
     </ul>
