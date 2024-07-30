@@ -13,8 +13,6 @@ import {
 })
 export class PbStorageService {
   public async getManifest(id: string): Promise<Manifest | null> {
-    console.log('getManifest service');
-
     const pb = new PocketBase(environment.baseUrl) as TypedPocketBase;
 
     try {
@@ -44,16 +42,12 @@ export class PbStorageService {
   }
 
   public async saveManifest(manifestId: string, manifest: Manifest) {
-    console.log('saveManifest service');
-
     const pb = new PocketBase(environment.baseUrl) as TypedPocketBase;
 
     try {
       const response = await await pb
         .collection(Collections.UserManifests)
         .update(manifestId, { data: manifest });
-
-      console.log(response);
     } catch (e) {
       console.log(e);
     }

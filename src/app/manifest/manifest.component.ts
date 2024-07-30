@@ -97,7 +97,6 @@ export class ManifestComponent implements OnInit {
     effect(
       () => {
         const manifestId = this.manifestId();
-        console.log('manifestId component changed');
 
         if (manifestId) {
           this.manifestSvc.setManifestId(manifestId);
@@ -125,9 +124,12 @@ export class ManifestComponent implements OnInit {
         debounceTime(1000),
         distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
       )
-      .subscribe((manifest) =>
-        this.manifestSvc.setManifest(manifest as Manifest)
-      );
+      .subscribe((manifest) => {
+        if (!this.manifestForm.dirty) {
+          return;
+        }
+        this.manifestSvc.setManifest(manifest as Manifest, false);
+      });
   }
 
   logout() {

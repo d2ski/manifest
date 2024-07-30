@@ -42,6 +42,5 @@ export class ManifestsListComponent implements OnInit {
     const newManifestId = await this.manifestsListSvc.addNewManifest(
       date.toISOString()
     );
-    console.log(newManifestId);
   }
 }

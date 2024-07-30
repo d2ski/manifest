@@ -15,31 +15,20 @@ export class ManifestService {
   private readonly storage = inject(PbStorageService);
 
   constructor() {
-    effect(
-      async () => {
-        const manifestId = this._manifestId();
-        if (manifestId) {
-          await this.loadManifest(manifestId);
-        }
-      },
-      { allowSignalWrites: true }
-    );
-
-    effect(
-      () => {
-        const manifest = this._manifest();
-
-        if (manifest) {
-          this.saveManifest();
-        }
-      },
-      { allowSignalWrites: true }
-    );
+    effect(async () => {
+      const manifestId = this._manifestId();
+      if (manifestId) {
+        await this.loadManifest(manifestId);
+      }
+    });
   }
 
   private async loadManifest(manifestId: string) {
     const manifest = await this.storage.getManifest(manifestId);
-    this._manifest.set(manifest);
+
+    if (manifest) {
+      this.setManifest(manifest, true);
+    }
   }
 
   private async saveManifest() {
@@ -55,7 +44,11 @@ export class ManifestService {
     this._manifestId.set(manifestId);
   }
 
-  public setManifest(manifest: Manifest) {
+  public setManifest(manifest: Manifest, isInitialLoad: boolean) {
     this._manifest.set(manifest);
+
+    if (!isInitialLoad) {
+      this.saveManifest();
+    }
   }
 }

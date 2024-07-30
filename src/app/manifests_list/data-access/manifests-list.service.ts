@@ -26,8 +26,6 @@ export class ManifestsListService {
         sort: '-date',
       });
 
-    console.log(manifestsList);
-
     this._manifestsList.set(manifestsList);
   }
 
